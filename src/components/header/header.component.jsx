@@ -1,4 +1,6 @@
 import React from 'react';
+//an HOC that lets this component connect to redux
+import { connect } from 'react-redux';
 import './header.style.scss'
 import { Link } from 'react-router-dom';
 import{ReactComponent as Logo} from  '../../assets/4.3 crown.svg'
@@ -22,4 +24,10 @@ const Header=({currentUser})=>(
         </div>
     </div>
 )
-export default Header;
+
+//this name is optional but it's standard with redux codebases.it returns an object with name of the property is the property we want to pass in, and value is the . state is rottReducer
+const mapStateToProps=state=>({
+    currentUser:state.user.currentUser
+})
+
+export default connect(mapStateToProps)(Header);
