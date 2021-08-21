@@ -8,8 +8,10 @@
 
 import { combineReducers } from "redux";
 import userReducer from "./user/user-reducer";
+import  cartReducer  from "./cart/cart.reducer";
 
 //key is partial reducer and value is the actual reducer function we wrote . this function just adds different reducers to a single object for redux
 export default combineReducers({
-    user:userReducer
+    user:userReducer,
+    cart:cartReducer
 }) 
