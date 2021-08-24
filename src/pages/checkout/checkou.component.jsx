@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { selectCartItems,selectItemTotalCount } from '../../redux/cart/cart.selectors';
+import { selectCartItems,selectCartTotalCount } from '../../redux/cart/cart.selectors';
 import { createStructuredSelector } from 'reselect';
-import { addItem,decreaseItem,removeItem } from '../../redux/cart/cart.actions';
 import CheckoutItem from '../../components/checkout-item/checkout-item.component';
 
 import './checkout.styles.scss';
@@ -29,24 +28,20 @@ const CheckoutPage=({cartItems,cartItemTotal})=>(
         </div>
         <div>
             {
-                cartItems.map(item=><CheckoutItem key={cartItemTotal.id} item={item} />)
+                cartItems.map(item=><CheckoutItem key={item.id} item={item} />)
             }
         
         </div>
         <div className='total'>
-            <span>Total:{cartItemTotal}</span>
+        <span>Total:{cartItemTotal}</span>
         </div>
     </div>
 )
 
 const mapStateToProps=createStructuredSelector({
     cartItems:selectCartItems,
-    cartItemTotal:selectItemTotalCount
-})
-const mapDispathcToProps=dispatch=>({
-    addItem:item => dispatch(addItem(item)),
-    decreaseItem:item=>dispatch(decreaseItem(item)),
-    removeItem:item=>dispatch(removeItem(item))
+    cartItemTotal:selectCartTotalCount
 })
 
-export default connect(mapStateToProps,mapDispathcToProps)(CheckoutPage);
+
+export default connect(mapStateToProps)(CheckoutPage);

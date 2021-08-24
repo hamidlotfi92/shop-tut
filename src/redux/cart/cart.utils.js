@@ -6,11 +6,7 @@ export const addItemToCart=(cartItems,cartItemToAdd)=>{
     return [...cartItems,{...cartItemToAdd,quantity:1}]
 }
 
-export const removeItemFromCart=(cartItems,cartItemToRemove)=>{
-    const itemIndex=cartItems.find(item=>item.id===cartItemToRemove.id);
-    cartItems.splice(itemIndex,1);
-    return cartItems;
-}
+
 
 export const decreaseItemFromCart=(cartItems,cartItemToDecrease)=>{
 
