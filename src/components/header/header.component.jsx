@@ -7,6 +7,9 @@ import{ReactComponent as Logo} from  '../../assets/4.3 crown.svg'
 import { auth } from '../../firebase/firebase.utils';
 import CartIcon from '../cart-icon/cart-icon.component';
 import Cart from '../cart/cart.component';
+import { createStructuredSelector } from 'reselect';
+import { selectCartHidden } from '../../redux/cart/cart.selectors';
+import { selectCurrentUser } from '../../redux/user/user.selector';
 
 const Header=({currentUser,hidden})=>(
     <div className='header'>
@@ -37,9 +40,9 @@ const Header=({currentUser,hidden})=>(
 )
 
 //this name is optional but it's standard with redux codebases.it returns an object with name of the property is the property we want to pass in, and value is the . state is rottReducer
-const mapStateToProps=({user:{currentUser},cart:{hidden}})=>({
-    currentUser,
-    hidden
+const mapStateToProps=createStructuredSelector({
+    currentUser:selectCurrentUser,
+    hidden:selectCartHidden
 })
 
 export default connect(mapStateToProps)(Header);
