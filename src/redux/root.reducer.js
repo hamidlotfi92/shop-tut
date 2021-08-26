@@ -9,9 +9,30 @@
 import { combineReducers } from "redux";
 import userReducer from "./user/user-reducer";
 import  cartReducer  from "./cart/cart.reducer";
+import directoryReducer from "./directory/directory.reducer";
+import { persistReducer } from "redux-persist";
+import shopReducer from "./shop/shop.reducer";
+
+import storage from "redux-persist/lib/storage";
+
+// config object for persistance and storage
+const persistConfig={
+    // at what point do we want to start storing everithing
+    key:'root',
+    // ponts to the object from redux-persist
+    storage,
+    // list of reducer we want to store as array,here user is handled by firebase auth persistance session
+    whitelist:['cart']
+}
 
 //key is partial reducer and value is the actual reducer function we wrote . this function just adds different reducers to a single object for redux
-export default combineReducers({
+const rootReducer=combineReducers({
     user:userReducer,
-    cart:cartReducer
-}) 
+    cart:cartReducer,
+    directory:directoryReducer,
+    shop:shopReducer
+})
+
+
+// this will return back a modified version of rootReducer with persist config and persist capablity
+export default persistReducer(persistConfig,rootReducer);

@@ -11,7 +11,7 @@ const CheckoutItem=({item, addItem,removeItem,decreaseItem})=>
     <div className='checkout-item'>
     
         <div className='image-container'>
-        <img  alt='item' src={item.imageUrl}/>
+            <img  alt='item' src={item.imageUrl}/>
         </div>
         <span className='name'>{item.name}</span>
         <div className='quantity'>

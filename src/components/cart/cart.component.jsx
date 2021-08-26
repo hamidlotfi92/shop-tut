@@ -39,6 +39,6 @@ const mapStateToProps=createStructuredSelector({
     
 })
 
-
+//when we don't use dispatch in connect fnction, it will automaticaly add it to function. we just need to add "dispatch "parameter to function then the call it with action
 
 export default withRouter(connect(mapStateToProps)(Cart)) ;
