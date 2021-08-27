@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { selectCartItems,selectCartTotalCount } from '../../redux/cart/cart.selectors';
 import { createStructuredSelector } from 'reselect';
 import CheckoutItem from '../../components/checkout-item/checkout-item.component';
+import StripeCheckoutButton from '../../components/stripe-button/stripe-button.component';
 
 import './checkout.styles.scss';
 
@@ -35,6 +36,8 @@ const CheckoutPage=({cartItems,cartItemTotal})=>(
         <div className='total'>
         <span>Total:{cartItemTotal}</span>
         </div>
+        <div className='test-warning'>PLEASE USE <br/>4242 4242 4242 <br/> AS CARD NUMBER AND ANY FUTURE DATE AND A 3 DIGIT CVV </div>
+        <StripeCheckoutButton price={cartItemTotal}/>
     </div>
 )
 

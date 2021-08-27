@@ -115,7 +115,7 @@ const INITIAL_STATE={
             }
           ]
         },
-      kackets:   {
+      jackets:   {
           id: 3,
           title: 'Jackets',
           routeName: 'jackets',
