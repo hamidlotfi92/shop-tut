@@ -12,13 +12,47 @@ var firebaseConfig = {
     measurementId: "G-KZ0K3GZ26G"
   };
 
+  // this one adds objects to firebase database, so we don't have to set them manually
+  export const addCollectionAndDocuments=async(collectionKey,objectsToAdd) => {
+    const collectionRef=firestore.collection(collectionKey);
+    //in order to set all the data together we should batch them, and firestore has a batch object
+    
+    const batch = firestore.batch();
+    objectsToAdd.forEach(element => {
+      // this will create an empty object and randomly give it an id
+      const newDocRef = collectionRef.doc();
+      batch.set(newDocRef,element);
+    });
+    //commit method sets all the values in batch together. also it will return a promis, when it succeed it will return a void value so we can add .then()
+    return await batch.commit();
+  }
+
+  export const converCollectionSnapshotToMap=(collections)=>{
+    const transformedCollection = collections.docs.map(doc=>{
+      const { title, items } =doc.data();
+      
+      return {
+        routeName: encodeURI(title.toLowerCase()),
+        id: doc.id,
+        title,
+        items
+      }
+    
+    })
+    
+    return transformedCollection.reduce((accumulator, collection) =>{
+      accumulator[collection.title.toLowerCase()] = collection;
+      return accumulator;
+    }, {})
+  }
   // creating user profile in DB, if it's not authenticated it simply returns nothing but if not, it creates and return the user as an object
-  export const createUserProfileDocument= async(userAuth,additionalData)=>{
-    if(!userAuth)return;
+  export const createUserProfileDocument= async(userAuth,additionalData) => {
+    if (!userAuth) return;
     //gets user's uniq id
-    const userRef= firestore.doc(`users/${userAuth.uid}`);
+    const userRef = firestore.doc(`users/${userAuth.uid}`);
     //gets a snapshot of the user. it has limited info about the user, like exists 
     const snapShot=await userRef.get();
+      
 
     if(!snapShot.exists){
       const {displayName,email}=userAuth;

@@ -26,9 +26,7 @@ const Cart=({cartItems,history,dispatch})=>(
              } >Go TO CHECKOUT</CustomButton>
         
         </div>
-        <div>
-          <span></span>
-        </div>  
+        
     </div>
     
 )

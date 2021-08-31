@@ -6,9 +6,11 @@ import CheckoutPage from './pages/checkout/checkou.component';
 import {Switch, Route,Redirect } from 'react-router-dom';
 import Header from './components/header/header.component';
 import SignInOut from './pages/singin-out/signin-out.component';
-import { auth,createUserProfileDocument } from './firebase/firebase.utils';
+import { auth,createUserProfileDocument, addCollectionAndDocuments } from './firebase/firebase.utils';
 import React from 'react';
 import {connect} from 'react-redux';
+import { selectCollectionsForPreview } from './redux/shop/shop.selectors';
+
 import { setCurrentUser } from './redux/user/user.actions';
 import {selectCurrentUser} from './redux/user/user.selector';
 import {createStructuredSelector} from 'reselect';
@@ -18,7 +20,7 @@ class App extends React.Component {
   unsubscribeFromAuth=null;
 
   componentDidMount(){
-    const {setCurrentUser}=this.props;
+    const {setCurrentUser,collectionsArray} = this.props;
     //checls if authentication state has changed in firebase
     this.unsubscribeFromAuth= auth.onAuthStateChanged(async userAuth=>{
       //checks if the authenticated user exist
@@ -36,12 +38,14 @@ class App extends React.Component {
      }
     //if it exist and is part of DB just sets it as current user
      setCurrentUser(userAuth);
+     addCollectionAndDocuments('collections',collectionsArray.map(({title, items}) => ({title, items})))
     })
   }
   
   componentWillUnmount(){
     //unsubscribes from authenticator and closes the connection
     this.unsubscribeFromAuth();
+
   }
 
   render(){
@@ -64,7 +68,8 @@ class App extends React.Component {
 }
 
 const mapStateToProps=createStructuredSelector({
-  currentUser :selectCurrentUser
+  currentUser :selectCurrentUser,
+  collectionsArray: selectCollectionsForPreview
 })
 const mapDispatchToProps=dispatch=>({
   setCurrentUser:user=>dispatch(setCurrentUser(user))
