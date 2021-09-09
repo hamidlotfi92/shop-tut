@@ -1,5 +1,12 @@
+// this component uses the react-stripe-checkout library. that provides an easy way to make a purchase in stripe
+
+
+//react
 import React from 'react';
+//components
 import StripeCheckout from 'react-stripe-checkout';
+
+
 // axios is a library to fetch and get data from server
 import axios from 'axios';
 

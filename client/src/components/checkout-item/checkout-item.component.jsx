@@ -1,9 +1,17 @@
+// each cart item needs to be increased/decreased in count and also be removed from cart. this component gets an item, shows it and adds above fnctionality to them using redux actions
+
+// React
 import React from 'react';
-import { addItem,decreaseItem,removeItem } from '../../redux/cart/cart.actions';
+
+
+//Redux
 import { connect } from 'react-redux';
+import { addItem,decreaseItem,removeItem } from '../../redux/cart/cart.actions';
+
+//comonents
 import CustomButton from '../custom-button/custom-buton.component';
 
-
+//styls
 import './checkout-itme.styles.scss';
 
 const CheckoutItem=({item, addItem,removeItem,decreaseItem})=>
@@ -30,9 +38,12 @@ const CheckoutItem=({item, addItem,removeItem,decreaseItem})=>
     </div>
 )
 
+// mapDispatchToProps dispatches data to redux store 
 const mapDispathcToProps=dispatch=>({
     addItem:item => dispatch(addItem(item)),
     decreaseItem:item=>dispatch(decreaseItem(item)),
     removeItem:item=>dispatch(removeItem(item))
 })
+
+//connect HOC wraps around component to redux
 export default connect(null,mapDispathcToProps)(CheckoutItem);

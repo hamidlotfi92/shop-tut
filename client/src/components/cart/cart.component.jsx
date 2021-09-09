@@ -1,12 +1,28 @@
+// cart component is responsible for showin items is cart as well as reouting to chechout page by adding chechout to current history prop
+
+
+//react
 import React from 'react';
+
+
+//components
 import CustomButton from '../custom-button/custom-buton.component';
 import CartItem from '../cart-item/cart-item.component';
+
+//redux
 import { connect } from 'react-redux';
-import './card.styles.scss';
 import { selectCartItems} from'../../redux/cart/cart.selectors';
 import { toggleCartHidden } from '../../redux/cart/cart.actions';
 import { createStructuredSelector } from 'reselect';
+
+//react router
 import { withRouter } from 'react-router-dom';
+
+//styles
+import './card.styles.scss';
+
+
+
 const Cart=({cartItems,history,dispatch})=>(
     <div>
         <div className='cart'>
@@ -31,12 +47,12 @@ const Cart=({cartItems,history,dispatch})=>(
     
 )
 
-
-const mapStateToProps=createStructuredSelector({
+// mapStateToProps gets data from redux store or selectors
+const mapStateToProps = createStructuredSelector({
     cartItems:selectCartItems,
     
 })
 
-//when we don't use dispatch in connect fnction, it will automaticaly add it to function. we just need to add "dispatch "parameter to function then the call it with action
+//when we don't use dispatch in connect HOC, it will automaticaly add it to function. we just need to add "dispatch "parameter to function then the call it with action
 
 export default withRouter(connect(mapStateToProps)(Cart)) ;

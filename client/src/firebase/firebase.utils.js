@@ -1,3 +1,7 @@
+// this utility file containes firebase config and fuinctions that are responsible fore accessing database, authentications and users.
+
+
+// firebase
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
@@ -27,6 +31,7 @@ var firebaseConfig = {
     return await batch.commit();
   }
 
+  // this functions get a collection and transform it to the form we can use.
   export const converCollectionSnapshotToMap=(collections)=>{
     const transformedCollection = collections.docs.map(doc=>{
       const { title, items } =doc.data();
@@ -45,6 +50,8 @@ var firebaseConfig = {
       return accumulator;
     }, {})
   }
+
+// gets the current user from friebase
 export const getCurrentUser= () => {
   return new Promise((resolve, reject) => {
     const unsubscribe = auth.onAuthStateChanged(userAuth => {
@@ -62,7 +69,6 @@ export const getCurrentUser= () => {
     //gets a snapshot of the user. it has limited info about the user, like exists 
     const snapShot=await userRef.get();
       
-  console.log('additional',additionalData,' USERauth ',userAuth);
     if(!snapShot.exists){
       let displayName=''
             const {email }=userAuth;
@@ -95,14 +101,19 @@ export const getCurrentUser= () => {
 
   
   export const auth=firebase.auth();
+
   export const firestore=firebase.firestore();
 
   // // Commented due to refactoring for ADDING saga
   // const provider=new firebase.auth.GoogleAuthProvider();
   //  provider.setCustomParameters({prompt:'select_account'});
   // export const signInWithGoogle=()=>auth.signInWithPopup(provider);
+
+  //provides a method to authenticate with firebase. we acan also use gihub and some other accounts but we have to enable them first in firebase
   export const googleProvider=new firebase.auth.GoogleAuthProvider();
   googleProvider.setCustomParameters({prompt:'select_account'});
+
+  // opens google popup window to select an account
   export const signInWithGoogle=()=>auth.signInWithPopup(googleProvider);
   
   export default firebase;

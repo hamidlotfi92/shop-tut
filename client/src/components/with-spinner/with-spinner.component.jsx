@@ -1,5 +1,10 @@
+//the following HOC component shows a css loading spinner that gets a component and if it has  isLoading as prop it shown the sppiner, otherwise shows the component
+
+
+// React
 import React from "react";
 
+//styles
 import './with-spinner.styles.scss';
 
 const WithSpinner = WrappedComponent =>{

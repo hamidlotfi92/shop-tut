@@ -1,14 +1,25 @@
+// this component is sed in signInOut page and is in chanre og signing up.
+
+
+//React
 import React,{ useState } from'react';
-import './sign-up.styles.scss';
+
+//redux
 import {connect} from 'react-redux'
-import FormInput from '../form-input/form-input.component';
-import CustomButton from '../custom-button/custom-buton.component';
 import {signUpStart} from '../../redux/user/user.actions'
 
+//components
+import FormInput from '../form-input/form-input.component';
+import CustomButton from '../custom-button/custom-buton.component';
+
+//styles
+import './sign-up.styles.scss';
 
 
+// uses hooks so we don't use class to access state
 const SignUp = ({signUpStart}) => {
     
+    //usestate is a hook to create a state and pure function to change that
     const [userCredentials, setCredentials]= useState({
         displayName:'',
         email:'',
@@ -17,7 +28,8 @@ const SignUp = ({signUpStart}) => {
     });
        
      const {displayName, email, password, confirmPassword}=userCredentials;
-    const handleSubmit=async event=>{
+
+    const handleSubmit = async event=>{
         event.preventDefault();
        
         
@@ -25,6 +37,7 @@ const SignUp = ({signUpStart}) => {
         if(password!==confirmPassword){
             alert("Passwords don't match")
         }
+            // starts the sgn up process.
             signUpStart(email,password,displayName);
             // const {user}=await auth.createUserWithEmailAndPassword(email,password);
             // await createUserProfileDocument(user,{displayName});
@@ -32,7 +45,8 @@ const SignUp = ({signUpStart}) => {
        
     }
 
-    const handleChange=event=>{
+
+    const handleChange = event=>{
         const {name,value}=event.target;
         setCredentials({...userCredentials,[name]:value});
     }
@@ -81,9 +95,10 @@ const SignUp = ({signUpStart}) => {
         )
     }
  
-
+// mapDispatchToProps dispatches data to redux store 
 const mapDispatchToPtops = dispatch =>({
     signUpStart: (email, password, displayName) => dispatch(signUpStart({email, password, displayName}))
 })
 
+//connect HOC wraps around component to redux
 export default connect(null,mapDispatchToPtops)(SignUp);

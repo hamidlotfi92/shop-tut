@@ -1,18 +1,29 @@
+//
+
+
+
+//React
 import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import CollectionsOverviewContainer from "../../components/collection-overview/xollection-overview.container";
-import CollectionPageContainer from "../collection/collection.container";
-import { createStructuredSelector } from "reselect";
-import { selectIsCollectionFetching } from "../../redux/shop/shop.selectors";
 import { Route } from "react-router-dom";
 
+
+//redux
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+import { selectIsCollectionFetching } from "../../redux/shop/shop.selectors";
 import{ fetchCollectionStart } from '../../redux/shop/shop.actions'
+
+//components
+import CollectionsOverviewContainer from "../../components/collection-overview/xollection-overview.container";
+import CollectionPageContainer from "../collection/collection.container";
+
+
 //FOR USING THUNK import{ fetchCollectionStartAsync } from '../../redux/shop/shop.actions'
 
 
 
 // React-router passmatch, location and history to compnent we pass to Route component
-const ShopPage = ({fetchCollectionStart, match, isLoading}) => {
+const ShopPage = ({fetchCollectionStart, match}) => {
         
         useEffect(() => {
                 
@@ -36,15 +47,16 @@ const ShopPage = ({fetchCollectionStart, match, isLoading}) => {
         )
 }
 
-
+// mapDispatchToProps dispatches data to redux store
 const mapDispatchToProps = dispatch =>({
 fetchCollectionStart: () => dispatch(fetchCollectionStart())
 //FOR USING THUNK fetchCollectionStartAsync: () => dispatch(fetchCollectionStartAsync())
 })
 
+// mapStateToProps gets data from redux store or selectors
 const mapStateToProps = createStructuredSelector({
         isLoading: selectIsCollectionFetching
     })
     
-
+//connect HOC wraps around component to redux
 export default connect(mapStateToProps,mapDispatchToProps)(ShopPage);

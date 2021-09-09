@@ -1,11 +1,23 @@
+//this page is showing cart and  provides increament,decreament and removefor added items also payment is in this page
+
+
+//React
+
 import React from 'react';
+
+//redux
 import { connect } from 'react-redux';
 import { selectCartItems,selectCartTotalCount } from '../../redux/cart/cart.selectors';
 import { createStructuredSelector } from 'reselect';
+
+// components
 import CheckoutItem from '../../components/checkout-item/checkout-item.component';
 import StripeCheckoutButton from '../../components/stripe-button/stripe-button.component';
 
+
+//styles
 import './checkout.styles.scss';
+
 
 const CheckoutPage=({cartItems,cartItemTotal})=>(
     <div className='checkout-page'>
@@ -41,10 +53,11 @@ const CheckoutPage=({cartItems,cartItemTotal})=>(
     </div>
 )
 
-const mapStateToProps=createStructuredSelector({
+// mapStateToProps gets data from redux store or selectors
+const mapStateToProps = createStructuredSelector({
     cartItems:selectCartItems,
     cartItemTotal:selectCartTotalCount
 })
 
-
+//connect HOC wraps around component to redux
 export default connect(mapStateToProps)(CheckoutPage);

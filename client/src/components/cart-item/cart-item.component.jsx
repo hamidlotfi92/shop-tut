@@ -1,5 +1,9 @@
+//this component each item we have in cart.
+
+// react
 import React from 'react';
 
+//styles
 import './cart-item.styles.scss';
 
 const CartItem=({item:{imageUrl,price, name,quantity}})=>(

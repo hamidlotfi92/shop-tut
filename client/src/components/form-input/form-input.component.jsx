@@ -1,6 +1,12 @@
+// since each form an input needs alable and input, we create a reuable component. that can handle diifrent functionality.
+
+// react
 import React from 'react';
 
+// styles
 import './form-input.styles.scss';
+
+
 
 
 const FormInput=({handleChange,lable,...otherProps})=>(

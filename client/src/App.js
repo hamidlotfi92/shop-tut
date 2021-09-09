@@ -1,18 +1,27 @@
+//
 
-import './App.css';
-import HomePage from './pages/homepage/homepage.component'
-import ShopPage from './pages/shop/shop.component';
-import CheckoutPage from './pages/checkout/checkou.component';
+
+//React
 import {Switch, Route,Redirect } from 'react-router-dom';
-import Header from './components/header/header.component';
-import SignInOut from './pages/singin-out/signin-out.component';
 import React, { useEffect } from 'react';
+
+//redux
 import {connect} from 'react-redux';
 import { selectCollectionsForPreview } from './redux/shop/shop.selectors';
 import {selectCurrentUser} from './redux/user/user.selector';
 import {createStructuredSelector} from 'reselect';
-
 import {checkUserSession} from './redux/user/user.actions'
+
+//coponents
+import HomePage from './pages/homepage/homepage.component'
+import ShopPage from './pages/shop/shop.component';
+import CheckoutPage from './pages/checkout/checkou.component';
+import Header from './components/header/header.component';
+import SignInOut from './pages/singin-out/signin-out.component';
+
+//styles
+import './App.css';
+
 
 const App = ({checkUserSession, currentUser}) => {
   
@@ -51,7 +60,7 @@ const App = ({checkUserSession, currentUser}) => {
 
   // }
 
- 
+    //this part is responsible for defining where each address is routing to
      return (
     <div >
       <Header />
@@ -69,14 +78,15 @@ const App = ({checkUserSession, currentUser}) => {
   
  
 
-
-const mapStateToProps=createStructuredSelector({
+// mapDispatchToProps dispatches data to redux store
+const mapStateToProps = createStructuredSelector({
   currentUser :selectCurrentUser,
   collectionsArray: selectCollectionsForPreview
 })
 
+// mapStateToProps gets data from redux store or selectors
 const mapDispatchToProps = dispatch =>({
   checkUserSession: () => dispatch(checkUserSession())
 })
-
+//connect HOC wraps around component to redux
 export default connect(mapStateToProps, mapDispatchToProps)( App);

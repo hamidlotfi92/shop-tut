@@ -1,9 +1,21 @@
+//this component is only used in homeplage to show all categories
+
+//React
 import React from 'react';
-import MenuItem from'../menu-item/menu-item.componen';
-import './directory.styles.scss'
+
+//Redux
 import { selectDirectorySections } from '../../redux/directory/directory.selector';
 import { createStructuredSelector } from 'reselect';
 import {connect} from 'react-redux';
+
+//components
+import MenuItem from'../menu-item/menu-item.componen';
+
+//styles
+import './directory.styles.scss'
+
+
+
 
 const Directory =({sections})=>(
         <div className="directory-menu">
@@ -15,8 +27,10 @@ const Directory =({sections})=>(
         </div>
     )
         
-  
-const mapStateToProps=createStructuredSelector({
+// mapStateToProps gets data from redux store or selectors
+const mapStateToProps = createStructuredSelector({
     sections:selectDirectorySections
 })
+
+//connect HOC wraps around component to redux
 export default connect(mapStateToProps)(Directory);

@@ -1,10 +1,22 @@
+// this is the collection page.according to the props it get, shows the items inside that collection
+
+
+//React
 import React from "react";
+
+
+//redux
 import { connect } from "react-redux";
-import CollectionItem from "../../components/collection-item/collection-item.component";
 import { selectCollection } from "../../redux/shop/shop.selectors";
-import { createStructuredSelector } from "reselect";
+
+//components
+import CollectionItem from "../../components/collection-item/collection-item.component";
+
+
+//styles
 import './collection.styles.scss';
-import { addItem } from "../../redux/cart/cart.actions";
+
+
 
 const CollectionPage=({ collection})=>{
     
@@ -36,4 +48,6 @@ const mapStateToProps=(state, ownProps)=>({
     //this (state is necessary becuase unlike other selectors, this one needs a part of the state depending on the url parameter )
     collection:selectCollection(ownProps.match.params.collectionId)(state)
 })
+
+//connect HOC wraps around component to redux
 export default connect(mapStateToProps)(CollectionPage);
