@@ -34,7 +34,7 @@ const StripeCheckoutButton=({price})=>{
     return (
         <StripeCheckout 
             lable='Pay Now'
-            name='MY F shop'
+            name='TEST shop'
             billingAddress
             shippingAddress
             img=''
