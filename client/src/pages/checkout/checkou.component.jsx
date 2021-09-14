@@ -21,7 +21,6 @@ import './checkout.styles.scss';
 
 const CheckoutPage=({cartItems,cartItemTotal})=>(
     <div className='checkout-page'>
-
         <div className='checkout-header'>
             <div className='header-block'>
                 <span>Product</span>
@@ -39,14 +38,11 @@ const CheckoutPage=({cartItems,cartItemTotal})=>(
                 <span>Remove</span>
             </div>
         </div>
-        <div>
-            {
-                cartItems.map(item=><CheckoutItem key={item.id} item={item} />)
-            }
-        
-        </div>
+        {cartItems.map(cartItem => (
+            <CheckoutItem key={cartItem.id} item={cartItem} />
+          ))}
         <div className='total'>
-        <span>Total:{cartItemTotal}</span>
+            <span>Total:{cartItemTotal}</span>
         </div>
         <div className='test-warning'>PLEASE USE <br/>4242 4242 4242 <br/> AS CARD NUMBER AND ANY FUTURE DATE AND A 3 DIGIT CVV </div>
         <StripeCheckoutButton price={cartItemTotal}/>

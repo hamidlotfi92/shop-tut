@@ -34,12 +34,16 @@ const Cart=({cartItems,history,dispatch})=>(
                 <span className='empty-message'>Your cart is empty</span>
             }
             </div>
-            <CustomButton onClick={()=>{
-                history.push('/checkout');
-                dispatch(toggleCartHidden());
-            }
+            <CustomButton 
+                onClick={()=>{
+                    history.push('/checkout');
+                    dispatch(toggleCartHidden());
+                 }
                 
-             } >Go TO CHECKOUT</CustomButton>
+                 } 
+            >
+            Go TO CHECKOUT
+            </CustomButton>
         
         </div>
         

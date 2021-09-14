@@ -20,21 +20,22 @@
   .quantity,
   .price {
     width: 23%;
-
-    i {
-      margin-right: 5px;
-
-      &:hover {
-        cursor: pointer;
-      }
-    }
   }
 
   .quantity {
-    padding-left: 20px;
+    display: flex;
+
+    .arrow {
+      cursor: pointer;
+    }
+
+    .value {
+      margin: 0 10px;
+    }
   }
 
   .remove-button {
+    display: block;
     padding-left: 12px;
     cursor: pointer;
   }

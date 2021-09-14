@@ -8,35 +8,33 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { addItem,decreaseItem,removeItem } from '../../redux/cart/cart.actions';
 
-//comonents
-import CustomButton from '../custom-button/custom-buton.component';
-
 //styls
 import './checkout-itme.styles.scss';
 
-const CheckoutItem=({item, addItem,removeItem,decreaseItem})=>
-(
-    <div className='checkout-item'>
-    
-        <div className='image-container'>
-            <img  alt='item' src={item.imageUrl}/>
-        </div>
-        <span className='name'>{item.name}</span>
-        <div className='quantity'>
-            <i onClick={()=>decreaseItem(item)}>&#10094;</i>
-                <span >{item.quantity}</span>
-            <i onClick={()=>addItem(item)} >&#10095;</i>
-        </div>
-        <span className='price'>{item.price*item.quantity}$</span>
-        <div className='remove-button' >
-            <CustomButton  onClick={()=>{
-                removeItem(item);
-               console.log('REMOVE ACTION CALLED')
-           }} >Remove</CustomButton>
-        </div>
+const CheckoutItem=({item, addItem,removeItem,decreaseItem})=>{
+    const {imageUrl, name, quantity, price} = item;
+    return(
+        <div className='checkout-item'>
         
-    </div>
-)
+            <div className='image-container'>
+                <img  alt='item' src={imageUrl}/>
+            </div>
+            <span className='name'>{name}</span>
+            <span className='quantity'>
+                <div className='arrow' onClick={() => decreaseItem(item)}>
+                &#10094;
+                </div>
+            <span className='value'>{quantity}</span>
+            <div className='arrow' onClick={() => addItem(item)}>
+                &#10095;
+            </div>
+            </span>
+            <span className='price'>{price}$</span>
+            <div className='remove-button' onClick={() => removeItem(item)}>
+            &#10005;
+            </div>
+        </div>
+)};
 
 // mapDispatchToProps dispatches data to redux store 
 const mapDispathcToProps=dispatch=>({

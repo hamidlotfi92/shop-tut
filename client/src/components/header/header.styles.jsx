@@ -23,13 +23,13 @@ export const LogoContainer = styled(Link)`
 `;
 export const OptionsContainer = styled.div`
     width: 50%;
-    height: 100%;
+    top:42px;
     display: flex;
     align-items: center;
     justify-content: flex-end;
     position: absolute;
     right: 40px;
-    bottom: 42%; 
+    
 `
 
 export const OptionLink = styled(Link)`

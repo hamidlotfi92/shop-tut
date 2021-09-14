@@ -62,16 +62,16 @@ const App = ({checkUserSession, currentUser}) => {
 
     //this part is responsible for defining where each address is routing to
      return (
-    <div >
-      <Header />
-      <Switch>
-        <Route exact path='/' component={HomePage}/>
-        <Route path='/shop' component={ShopPage}/>
-        <Route exact path='/signin' render={()=>currentUser ?(<Redirect to='/'/>):(<SignInOut/>)}/>
-        <Route exact path='/checkout' component={CheckoutPage}/>
-      </Switch>
-      
-    </div>
+        <div >
+          <Header />
+          <Switch>
+            <Route exact path='/' component={HomePage}/>
+            <Route path='/shop' component={ShopPage}/>
+            <Route exact path='/signin' render={()=>currentUser ?(<Redirect to='/'/>):(<SignInOut/>)}/>
+            <Route exact path='/checkout' component={CheckoutPage}/>
+          </Switch>
+          
+        </div>
   )
   }
     
